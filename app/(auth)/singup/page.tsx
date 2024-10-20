@@ -11,9 +11,10 @@ export default function SignupPage() {
                 <Input label="Repetir Contraseña" type="password" isRequired={true} size="sm" />
             </div>
             <div className="flex flex-col item-center gap-2">
+
                 <Button color="primary">Iniciar Sesión</Button>
                 <p className="text-white">
-                    ¿Ya tienes una cuenta? <Link href='/login' className="text-orange-200 underline">Inicia sesión</Link>
+                    ¿Ya tienes una cuenta? <Link href='/login' className="text-orange-200 underline">Registrate</Link>
                 </p>
             </div>
         </div>
