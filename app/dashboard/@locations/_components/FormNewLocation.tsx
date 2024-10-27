@@ -1,30 +1,29 @@
-import { Input } from "@nextui-org/react"
-import { createLocation } from "@/actions/locations/create";
+import { API_URL } from "@/constants";
+import { Employee } from "@/entities";
+import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 import axios from "axios";
-import { cookies } from "next/headers";
-import { API_URL, TOKEN_NAME } from "@/constants";
-import SelectManager from "./SelectManager";
+import { authHeaders } from "@/helpers/authHeaders";
 
-export default async function FormNewLocation() {
-    const token = cookies().get(TOKEN_NAME)?.value;
-    const responseManagers = await axios.get(`${API_URL}/managers`, {
+export default async function EmployeesLocation({ store }: { store: string | string[] | undefined }) {
+    const { data } = await axios.get<Employee[]>(`${API_URL}/employees/location${store}`, {
         headers: {
-            Authorization: `Bearer ${token}`
+            ...authHeaders()
         }
-    })
-    const responseLocation = await axios.get(`${API_URL}/locations`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-    return (
-        <form action={createLocation}>
-            <Input label="Nombre" placeholder="Ocso  juriquilla" name="locationName" />
-            <Input label="Dirección" placeholder="Av De La Luz S/N" name="locationAddress" />
-            <Input label="Latitud" placeholder="120" name="locationLat" />
-            <Input label="Longitud" placeholder="20" name="locationLng" />
-            <SelectManager managers={responseManagers.data} locations={responseLocation.data} />
-            <button type="submit">Subir</button>
-        </form>
-    );
+    });
+    return data.map((employee) => {
+        const fullName = employee.employeeName + " " + employee.employeeLastName
+        return (
+            <Card className="mx-10 my-10">
+                <CardHeader>
+                    <p className="w-full">Nombre: <b>{fullName}</b></p>
+                </CardHeader>
+                <Divider />
+                <CardBody>
+                    <p className="w-full">Email: <b>{employee.employeeEmail}</b></p>
+                    <p className="w-full">Telefono: <b>{employee.employeePhoneNumber}</b></p>
+
+                </CardBody>
+            </Card>
+        )
+    });
 }

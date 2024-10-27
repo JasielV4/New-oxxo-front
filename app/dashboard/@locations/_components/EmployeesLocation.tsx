@@ -1,14 +1,13 @@
-import { API_URL, TOKEN_NAME } from "@/constants";
+import { API_URL } from "@/constants";
 import { Employee } from "@/entities";
 import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 import axios from "axios";
-import { cookies } from "next/headers";
+import { authHeaders } from "@/helpers/authHeaders";
 
 export default async function EmployeesLocation({ store }: { store: string | string[] | undefined }) {
-    const token = cookies().get(TOKEN_NAME)?.value;
     const { data } = await axios.get<Employee[]>(`${API_URL}/employees/location${store}`, {
         headers: {
-            Authorization: `Bearer ${token}`
+            ...authHeaders()
         }
     });
     return data.map((employee) => {
@@ -22,6 +21,7 @@ export default async function EmployeesLocation({ store }: { store: string | str
                 <CardBody>
                     <p className="w-full">Email: <b>{employee.employeeEmail}</b></p>
                     <p className="w-full">Telefono: <b>{employee.employeePhoneNumber}</b></p>
+
                 </CardBody>
             </Card>
         )
