@@ -1,4 +1,3 @@
-import axios from "axios";
 import { API_URL } from "@/constants";
 import { Location } from "@/entities";
 import SelectLocation from "./_components/SelectLocation";
@@ -10,11 +9,16 @@ import { authHeaders } from "@/helpers/authHeaders";
 const LocationsPage = async ({ searchParams }: {
     searchParams: { [key: string]: string | string[] | undefined };
 }) => {
-    let { data } = await axios.get<Location[]>(`${API_URL}/locations`, {
+    const response = await fetch(`${API_URL}/locations`, {
         headers: {
             ...authHeaders()
         },
-    },);
+        next: {
+            tags: ["dashboard:locations"]
+        }
+    },
+    );
+    let data: Location[] = await response.json()
     data = [
         {
             locationId: 0,
@@ -24,7 +28,6 @@ const LocationsPage = async ({ searchParams }: {
         },
         ...data
     ]
-
     return (
         <div className="w-7/12">
             <div className="w-full flex flex-col itens-center h-[90vh] bg-red-50">
