@@ -1,29 +1,22 @@
 'use client';
-import { Location } from "@/entities";
 import { Select, SelectItem } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
+import { Location, Manager } from "@/entities";
 
-export default function SelectLocation({ locations, store }: { locations: Location[], store: string | string[] | undefined; }) {
-    const router = useRouter();
+interface SelectManagerProps {
+    managers: Manager[],
+    locations: Location[],
+    defaultManager?: string,
+}
+export default function SelectManager({ managers, locations, defaultManager }: SelectManagerProps) {
+    const disabledKeys = locations.map((location: Location) => {
+        if (location.manager?.managerId != defaultManager) return location.manager?.managerId;
+    }).filter((managerId) => managerId != undefined)
     return (
-        <Select placeholder="Selecciona una tienda"
-            label="Tienda"
-            classNames={{
-                mainWrapper: "hover:ring-2 ring-red-300 rounded-xl transition-all"
-            }}
-            selectedKeys={store ? store : "0"}
-            onChange={((e) => {
-                if (e.target.value === "0" || e.target.value === "") {
-                    router.push(`/dashboard`)
-                } else {
-                    router.push(`/dashboard?store=${e.target.value}`)
-                }
-            })}
-        >
-            {locations.map((location: Location) => {
+        <Select defaultSelectedKeys={defaultManager != undefined ? [defaultManager] : []} label="Manager" name="manager" disabledKeys={disabledKeys}>
+            {managers.map((manager: Manager) => {
                 return (
-                    <SelectItem key={location.locationId}>
-                        {location.locationName}
+                    <SelectItem key={manager.managerId}>
+                        {manager.managerFullName}
                     </SelectItem>
                 );
             })}
