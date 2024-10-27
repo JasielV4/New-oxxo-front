@@ -1,7 +1,9 @@
 "use server";
 import { API_URL } from "@/constants";
+import { Location } from "@/entities";
 import { authHeaders } from "@/helpers/authHeaders";
 import { revalidatePath, revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createLocation(formData: FormData): Promise<void> {
     let location: any = {}
@@ -23,8 +25,13 @@ export async function createLocation(formData: FormData): Promise<void> {
         method: "POST",
         body: JSON.stringify(location),
         headers: {
+            'content-type': 'application/json',
             ...authHeaders(),
         }
     })
-    if (response.status === 201) revalidateTag("dashboard:locations");
+    const { locationId }: Location = await response.json()
+    if (response.status === 201) {
+        revalidateTag("dashboard:locations");
+        redirect(`/dashboard?store=${locationId}`)
+    }
 }
