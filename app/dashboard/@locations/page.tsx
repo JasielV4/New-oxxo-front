@@ -1,6 +1,6 @@
 import axios from "axios";
 import { cookies } from "next/headers";
-import { TOKEN_NAME } from "@/constants";
+import { TOKEN_NAME, API_URL } from "@/constants";
 import { Location } from "@/entities";
 import SelectLocation from "./_components/SelectLocation";
 import LocationCard from "./_components/LocationCard";
@@ -10,7 +10,7 @@ const LocationsPage = async ({ searchParams }: {
 }) => {
     const userCookies = cookies();
     const token = userCookies.get(TOKEN_NAME)?.value
-    let { data } = await axios.get<Location[]>("http://127.0.0.1:4000/locations", {
+    let { data } = await axios.get<Location[]>(`${API_URL}/locations`, {
         headers: {
             Authorization: `Bearer ${token}`
         },
@@ -24,6 +24,7 @@ const LocationsPage = async ({ searchParams }: {
         },
         ...data
     ]
+
     return (
         <div className="w-7/12">
             <div className="w-full flex flex-col itens-center h-[90vh] bg-red-50">
