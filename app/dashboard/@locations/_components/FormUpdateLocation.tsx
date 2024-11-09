@@ -4,6 +4,7 @@ import SelectManager from "./SelectManager";
 import { authHeaders } from "@/helpers/authHeaders";
 import { Location, Manager } from "@/entities";
 import { updateLocation } from "@/actions/locations/update";
+import { Button } from "@nextui-org/react";
 
 export default async function FormNewLocation({ store }: { store: string | string[] | undefined }) {
     if (!store || store === undefined || typeof store === 'object') return null;
@@ -26,7 +27,6 @@ export default async function FormNewLocation({ store }: { store: string | strin
         }
     })
     const dataLocations: Location[] = await responseLocation.json()
-
     let foundLocation = dataLocations.find((location) => location.locationId === +store)
     let foundManager = dataManagers.find((manager) => manager.managerId === foundLocation?.manager?.managerId)
     return (
@@ -37,7 +37,7 @@ export default async function FormNewLocation({ store }: { store: string | strin
             <Input required={true} defaultValue={foundLocation?.locationLatLng[1].toString()} label="Longitud" placeholder="20" name="locationLng" />
             <Input required={true} defaultValue={foundLocation?.locationName} label="Nombre" placeholder="Ocso  juriquilla" name="locationName" />
             <SelectManager defaultManager={foundManager?.managerId} managers={dataManagers} locations={dataLocations} />
-            <button type="submit" color="primary">Actualizar</button>
+            <Button type="submit" color="primary">Actualizar</Button>
         </form>
     );
 }
