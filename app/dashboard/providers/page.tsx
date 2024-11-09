@@ -3,8 +3,6 @@ import { authHeaders } from "@/helpers/authHeaders";
 import ProviderCard from "./_components/ProviderCard";
 import { Provider } from "@/entities";
 import Link from "next/link";
-import { Button } from "@nextui-org/react";
-import { LuPlus } from "react-icons/lu";
 import CreateProvider from "./_components/CreateProvider";
 import FormCreateProvider from "./_components/FormCreateProvider";
 
@@ -24,9 +22,7 @@ const ProviderPage = async () => {
             <CreateProvider>
                 <FormCreateProvider />
             </CreateProvider>
-            <Button className="w-fit" color="primary">
-                <LuPlus size="20" />
-            </Button>
+
             <div className="flex flex-wrap w-full py-20 flex-grow-0 gap-14">
                 {providers?.map((provider: Provider) => (
                     <Link
