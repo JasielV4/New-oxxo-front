@@ -1,6 +1,5 @@
 import { API_URL } from "@/constants";
 import { authHeaders } from "@/helpers/authHeaders";
-import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 import ManagerCard from "./_components/ManagerCard";
 import DeleteManagerButton from "./_components/DeleteManagerButton";
 import FormUpdateManager from "./_components/FormUpdateManager";

@@ -5,6 +5,7 @@ import ModalGeneric from "@/app/dashboard/_components/ModalGeneric";
 import FormUpdateUser from "./FormUpdateUser";
 import { LuPlus } from "react-icons/lu";
 import FormCreateUserManager from "./FormCreateUser";
+
 export default function ManagerCard({ manager }: { manager: Manager }) {
     return (
         <Card className="mx-20 py-2 text-center">

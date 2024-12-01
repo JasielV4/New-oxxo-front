@@ -21,7 +21,7 @@ export default async function FormUpdateManager({ manager }: { manager: Manager 
                 isRequired
                 label="Nombre completo"
                 defaultValue={manager.managerFullName}
-                placeholder="Fernando Morales"
+                placeholder="Joshua"
                 name="managerFullName"
             />
             <Input
@@ -29,7 +29,7 @@ export default async function FormUpdateManager({ manager }: { manager: Manager 
                 isRequired
                 label="Correo electronico"
                 defaultValue={manager.managerEmail}
-                placeholder="fermanager@ocso.com"
+                placeholder="JoshuaManager@ocso.com"
                 name="managerEmail"
             />
             <Input
@@ -37,7 +37,7 @@ export default async function FormUpdateManager({ manager }: { manager: Manager 
                 isRequired
                 label="Salario"
                 defaultValue={String(manager.managerSalary)}
-                placeholder="15000"
+                placeholder="25000"
                 name="managerSalary"
             />
             <Input
@@ -45,7 +45,7 @@ export default async function FormUpdateManager({ manager }: { manager: Manager 
                 isRequired
                 label="Número de teléfono"
                 defaultValue={manager.managerPhoneNumber}
-                placeholder="4111238213"
+                placeholder="4191230272"
                 name="managerPhoneNumber"
             />
             <SelectStore stores={stores} defaultStore={manager?.location?.locationId} />

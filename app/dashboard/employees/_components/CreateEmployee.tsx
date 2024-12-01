@@ -1,7 +1,6 @@
 'use client';
 import { Modal, ModalContent, ModalBody, Button, useDisclosure } from "@nextui-org/react";
 import { ReactNode } from "react";
-import { LuPencil, LuPlus } from "react-icons/lu";
 
 export default function CreateEmployee({ children, icon }: { children: ReactNode, icon: ReactNode }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();

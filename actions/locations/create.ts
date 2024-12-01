@@ -2,7 +2,7 @@
 import { API_URL } from "@/constants";
 import { Location } from "@/entities";
 import { authHeaders } from "@/helpers/authHeaders";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function createLocation(formData: FormData): Promise<void> {

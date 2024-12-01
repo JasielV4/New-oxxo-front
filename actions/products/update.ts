@@ -2,7 +2,6 @@
 import { API_URL } from "@/constants";
 import { authHeaders } from "@/helpers/authHeaders";
 import { revalidateTag } from "next/cache";
-import { redirect } from "next/navigation";
 
 export default async function updateProduct(productId: string, formData: FormData) {
     let product: any = {};
